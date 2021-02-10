@@ -363,6 +363,9 @@ func (ds durationSlice) Swap(a, b int) {
 type config struct {
 	Mailer struct {
 		cmd.ServiceConfig
+		// TODO(#5275): Refactor to named field once all configs in dev,
+		// staging and prod have been updated to contain `dbconfig`
+		// field
 		cmd.DBConfig
 		cmd.SMTPConfig
 

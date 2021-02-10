@@ -17,6 +17,9 @@ import (
 
 type config struct {
 	ExpiredAuthzPurger2 struct {
+		// TODO(#5275): Refactor to named field once all configs in dev,
+		// staging and prod have been updated to contain `dbconfig`
+		// field
 		cmd.DBConfig
 		DebugAddr string
 		Syslog    cmd.SyslogConfig

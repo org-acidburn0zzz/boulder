@@ -279,6 +279,10 @@ type config struct {
 // for the OCSP (and SCT) updater
 type OCSPUpdaterConfig struct {
 	cmd.ServiceConfig
+
+	// TODO(#5275): Refactor to named field once all configs in dev,
+	// staging and prod have been updated to contain `dbconfig`
+	// field
 	cmd.DBConfig
 
 	OldOCSPWindow    cmd.ConfigDuration

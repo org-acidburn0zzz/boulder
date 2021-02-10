@@ -145,6 +145,9 @@ func main() {
 	domainsFile := flag.String("domains", "", "If provided only output contacts for certificates that contain at least one of the domains in the provided file. Provided file should contain one domain per line")
 	type config struct {
 		ContactExporter struct {
+			// TODO(#5275): Refactor to named field once all configs in dev,
+			// staging and prod have been updated to contain `dbconfig`
+			// field
 			cmd.DBConfig
 			cmd.PasswordConfig
 			Features map[string]bool

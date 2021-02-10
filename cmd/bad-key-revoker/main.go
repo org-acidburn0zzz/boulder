@@ -339,6 +339,10 @@ func (bkr *badKeyRevoker) invoke() (bool, error) {
 func main() {
 	var config struct {
 		BadKeyRevoker struct {
+
+			// TODO(#5275): Refactor to named field once all configs in
+			// dev, staging and prod have been updated to contain
+			// `dbconfig` field
 			cmd.DBConfig
 			DebugAddr string
 

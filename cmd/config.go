@@ -42,10 +42,13 @@ type ServiceConfig struct {
 	TLS       TLSConfig
 }
 
-// DBConfig defines how to connect to a database. The connect string may be
+// DatabaseConfig defines how to connect to a database. The connect string may be
 // stored in a file separate from the config, because it can contain a password,
 // which we want to keep out of configs.
-type DBConfig struct {
+// TODO(#5275): Refactor once each component struct and all configs in
+// dev, staging and prod have been updated to contain the named
+// `DBConfig` field
+type DatabaseConfig struct {
 	DBConnect string
 	// A file containing a connect URL for the DB.
 	DBConnectFile string
@@ -75,11 +78,26 @@ type DBConfig struct {
 	ConnMaxIdleTime ConfigDuration
 }
 
+// DBConfig is a temporary wrapping struct for the fields in `DatabaseConfig`
+// TODO(#5275): Refactor once each component struct and all configs in
+// dev, staging and prod have been updated to contain the named
+// `DBConfig` field
+type DBConfig struct {
+	DBConfig DatabaseConfig
+	DatabaseConfig
+}
+
 // URL returns the DBConnect URL represented by this DBConfig object, either
 // loading it from disk or returning a default value. Leading and trailing
 // whitespace is stripped.
 func (d *DBConfig) URL() (string, error) {
-	if d.DBConnectFile != "" {
+	if d.DBConfig.DBConnectFile != "" {
+		url, err := ioutil.ReadFile(d.DBConfig.DBConnectFile)
+		return strings.TrimSpace(string(url)), err
+	} else if d.DBConnectFile != "" {
+		// TODO(#5275): Default back to this condition once each
+		// component struct and all configs in dev, staging and prod
+		// have been updated to contain the named `DBConfig` field
 		url, err := ioutil.ReadFile(d.DBConnectFile)
 		return strings.TrimSpace(string(url)), err
 	}

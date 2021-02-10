@@ -27,6 +27,9 @@ type JanitorConfig struct {
 	// Features holds potential Feature flags.
 	Features map[string]bool
 	// Common database connection configuration.
+	// TODO(#5275): Refactor to named field once all configs in dev,
+	// staging and prod have been updated to contain `dbconfig`
+	// field
 	cmd.DBConfig
 
 	// JobConfigs is a list of configs for individual cleanup jobs.

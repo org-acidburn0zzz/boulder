@@ -309,6 +309,9 @@ func (c *certChecker) checkCert(cert core.Certificate, ignoredLints map[string]b
 
 type config struct {
 	CertChecker struct {
+		// TODO(#5275): Refactor to named field once all configs in dev,
+		// staging and prod have been updated to contain `dbconfig`
+		// field
 		cmd.DBConfig
 		cmd.HostnamePolicyConfig
 

@@ -195,6 +195,10 @@ func (src *dbSource) Response(req *ocsp.Request) ([]byte, http.Header, error) {
 type config struct {
 	OCSPResponder struct {
 		cmd.ServiceConfig
+
+		// TODO(#5275): Refactor to named field once all configs in dev,
+		// staging and prod have been updated to contain `dbconfig`
+		// field
 		cmd.DBConfig
 
 		// Source indicates the source of pre-signed OCSP responses to be used. It

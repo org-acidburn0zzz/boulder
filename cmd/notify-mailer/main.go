@@ -406,6 +406,9 @@ func main() {
 	reconnMax := flag.Duration("reconnectMax", 5*60*time.Second, "Max sleep duration between reconnect attempts after exponential backoff")
 	type config struct {
 		NotifyMailer struct {
+			// TODO(#5275): Refactor to named field once all configs in dev,
+			// staging and prod have been updated to contain `dbconfig`
+			// field
 			cmd.DBConfig
 			cmd.PasswordConfig
 			cmd.SMTPConfig

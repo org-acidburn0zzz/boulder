@@ -46,6 +46,9 @@ args:
 
 type config struct {
 	Revoker struct {
+		// TODO(#5275): Refactor to named field once all configs in dev,
+		// staging and prod have been updated to contain `dbconfig`
+		// field
 		cmd.DBConfig
 		// Similarly, the Revoker needs a TLSConfig to set up its GRPC client certs,
 		// but doesn't get the TLS field from ServiceConfig, so declares its own.
